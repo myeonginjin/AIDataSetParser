@@ -39,12 +39,36 @@ public class Main {
                 words = str.split(":");       
                 return words[0];
             case 2:
-                words = str.split(":"); 
-                return words[1];
+                words = str.split(":");
+                String processedString = stringProcessing(words[1]);
+
+                return processedString;
             default:
                 return "";
         }
 
+    }
+
+    public static String stringProcessing(String line) {
+        String outPut = "";
+        boolean passData = false;
+        
+        for (int i = 0; i<line.length(); i++){
+            if(line.charAt(i) == '('){
+                passData = true;
+            }
+
+            else if(line.charAt(i) == ')'){
+                passData = false;
+                continue;
+            }
+
+            if(!passData && line.charAt(i) != ',') {
+                outPut += line.substring(i, i+1);
+            }
+        }
+
+        return outPut;
     }
 
 }
