@@ -1,5 +1,5 @@
-bonfire: diy(0.1598), music(0.0813), lifestyle(0.0758)
-comics: entertainment(0.3484), art(0.2624), science(0.2330)
+bonfire
+comics
 himalayan: nature(0.1862), people(0.1464), travel(0.1336)
 iceberg: diy(0.0844), people(0.0724), economy(0.0554)
 bento: diy(0.0554), lifestyle(0.0550), leisure(0.0137)
