@@ -1,46 +1,74 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
     public static String[] words;
+    public static String[] datas;
 
     public static void main(String[] args) {
         int type = 0;
-        String filePath = "data.txt";
-        System.out.println("1.image catagory 2.style category");
+        String filePath = "";
+        System.out.println("1.image catagory 2.style category 3.check Passing result");
 
         try (Scanner sc = new Scanner(System.in)) {
             type = sc.nextInt();
         }
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
+        if (type == 1 || type == 2) {
+            filePath = "lowData.txt";
 
-            while((line = br.readLine()) != null) {
-                String imageData = parsing(line, type);
-                System.out.println(imageData);
+            try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+                String line;
+    
+                while((line = br.readLine()) != null) {
+                    String imageData = lowDataParsing(line, type);
+                    System.out.println(imageData);
+                }
+    
+            } catch (IOException e) {
+                System.out.print(e.getMessage());
+            }   
+        }
+
+        else if (type == 3){
+            filePath = "data.txt";
+            int index = 0;
+
+            try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+                String line;
+                datas = new String[10000];
+    
+                while((line = br.readLine()) != null) {
+                    datas[index++] = line;
+                }
+    
+            } catch (IOException e) {
+                System.out.print(e.getMessage());
+            } 
+
+            for (int i = 0; i<index; i++){
+                System.out.println(datas[i]);
             }
 
-        } catch (IOException e) {
-            System.out.print(e.getMessage());
-        }   
+            System.out.print(index);
 
+        }
+
+        else {
+            System.out.print("plz choose 1~3");
+        }
     }
 
-    public static String parsing(String str, int type) {
+    public static String lowDataParsing(String str, int type) {
         switch (type) {
             case 1:         
                 words = str.split(":");       
                 return words[0];
             case 2:
                 words = str.split(":");
-                String processedString = stringProcessing(words[1]);
+                String processedString = lowDataStringProcessing(words[1]);
 
                 return processedString;
             default:
@@ -49,7 +77,7 @@ public class Main {
 
     }
 
-    public static String stringProcessing(String line) {
+    public static String lowDataStringProcessing(String line) {
         String outPut = "";
         boolean passData = false;
         
